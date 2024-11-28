@@ -1,15 +1,10 @@
 import json
 
-import paho.mqtt.client as mqtt
-
-from config import HOST, INPUT_TOPIC, KEEP_ALIVE, OUTPUT_TOPIC, PORT, TOPIC_ID
+from client import MQTTClientWrapper
+from config import INPUT_TOPIC, OUTPUT_TOPIC, TOPIC_ID
 from rules_engine import calculate_supplement
 from validation import validate_winter_supplement_input_data
 
-
-def on_connect(client, userdata, flags, reason_code, properties):
-    print(f'Connected with result code {reason_code}')
-    client.subscribe(f'{INPUT_TOPIC}/{TOPIC_ID}')
 
 def on_message(client, userdata, msg):
     print(f'{msg.topic}: {msg.payload}')
@@ -44,10 +39,5 @@ def on_message(client, userdata, msg):
     print(encoded_output_data) 
     client.publish(f'{OUTPUT_TOPIC}/{TOPIC_ID}', encoded_output_data)
 
-mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-mqttc.on_connect = on_connect
-mqttc.on_message = on_message
-
-mqttc.connect(HOST, PORT, KEEP_ALIVE)
-
-mqttc.loop_forever()
+client = MQTTClientWrapper(INPUT_TOPIC, OUTPUT_TOPIC, TOPIC_ID, on_message)
+client.start()
