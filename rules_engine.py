@@ -5,8 +5,7 @@ def calculate_base_amount(family_composition):
         case 'couple':
             base_amount = 120
         case _:
-            #TODO i dont like this, revisit later
-            base_amount = -1
+            raise ValueError(f"Invalid family composition: {family_composition}")
 
     return base_amount
 
