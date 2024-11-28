@@ -10,11 +10,13 @@ class TestRulesEngineWinterSupplement(unittest.TestCase):
 
     def test_calculate_base_amount_single(self):
         family_composition = 'single'
-        self.assertEqual(calculate_base_amount(self.program, family_composition), 60)
+        expected_base_amount = 60
+        self.assertEqual(calculate_base_amount(self.program, family_composition), expected_base_amount)
 
     def test_calculate_base_amount_couple(self):
         family_composition = 'couple'
-        self.assertEqual(calculate_base_amount(self.program, family_composition), 120)
+        expected_base_amount = 120
+        self.assertEqual(calculate_base_amount(self.program, family_composition), expected_base_amount)
 
     def test_calculate_base_amount_invalid_composition(self):
         family_composition = 'alone'
