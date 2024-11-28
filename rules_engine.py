@@ -1,29 +1,22 @@
-def calculate_base_amount(family_composition):
-    match family_composition:
-        case 'single':
-            base_amount = 60
-        case 'couple':
-            base_amount = 120
-        case _:
-            raise ValueError(f"Invalid family composition: {family_composition}")
+from constants import BASE_AMOUNTS, INELIGIBLE_AMOUNT, PER_CHILD_AMOUNTS
 
-    return base_amount
 
-def calculate_children_amount(number_of_children):
-    PER_CHILD_AMOUNT = 20
-    return number_of_children * PER_CHILD_AMOUNT
+def calculate_base_amount(program, family_composition, ):
+    return BASE_AMOUNTS[program][family_composition]
 
-def calculate_winter_supplement(number_of_children, family_composition, december_eligible):
-    if not december_eligible:
-        ineligible_amount = 0.0
+def calculate_children_amount(program, number_of_children, ):  
+    return PER_CHILD_AMOUNTS[program] * number_of_children
+
+def calculate_supplement(program, number_of_children, family_composition, eligible):
+    if not eligible:
         return {
-            'baseAmount': ineligible_amount,
-            'childrenAmount': ineligible_amount,
-            'supplementAmount': ineligible_amount
+            'baseAmount': INELIGIBLE_AMOUNT,
+            'childrenAmount': INELIGIBLE_AMOUNT,
+            'supplementAmount': INELIGIBLE_AMOUNT
         }
 
-    base_amount = calculate_base_amount(family_composition)
-    children_amount = calculate_children_amount(number_of_children)
+    base_amount = calculate_base_amount(program, family_composition)
+    children_amount = calculate_children_amount(program, number_of_children)
     supplement_amount = base_amount + children_amount
 
     return {

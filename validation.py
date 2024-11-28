@@ -1,4 +1,6 @@
-import logging 
+import logging
+
+from constants import FAMILY_COMPOSITIONS 
 
 logger = logging.getLogger()
 
@@ -9,12 +11,10 @@ def validate_winter_supplement_input_data(data):
         logger.info(f'Missing required input key(s) {missing_keys}')
         raise ValueError(f'Missing required input key(s) {missing_keys}')
     
-    # TODO make single/couple constant
-    if data['familyComposition'] not in ['single', 'couple']:
+    if data['familyComposition'] not in FAMILY_COMPOSITIONS:
         logger.info(f'familyComposition: {data['familyComposition']}')
         raise ValueError(f'Invalid family composition. Must be one single or couple.')
     
-    # TODO print/log data type and its value
     if not isinstance(data['numberOfChildren'], int) or data['numberOfChildren'] < 0:
         logger.info(f'numberOfChildren: {data['numberOfChildren']}, type: {type(data['numberOfChildren'])}')
         raise ValueError('Invalid number of children. Must be a non-negative integer.')
