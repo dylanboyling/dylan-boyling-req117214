@@ -35,13 +35,13 @@ class TestRulesEngineWinterSupplement(unittest.TestCase):
         expected_children_amount = 80
         self.assertEqual(calculate_children_amount(self.program, number_of_children), expected_children_amount)
 
-    def test_calculate_supplement_ineligibile(self):
+    def test_calculate_supplement_ineligible(self):
         number_of_children = 2
         family_composition = 'couple'
-        eligibile = False
+        eligible = False
         expected_supplement_amount = 0.0
 
-        response = calculate_supplement(self.program, number_of_children, family_composition, eligibile)
+        response = calculate_supplement(self.program, number_of_children, family_composition, eligible)
         self.assertEqual(response['baseAmount'], expected_supplement_amount)
         self.assertEqual(response['childrenAmount'], expected_supplement_amount)
         self.assertEqual(response['supplementAmount'], expected_supplement_amount)
@@ -49,12 +49,12 @@ class TestRulesEngineWinterSupplement(unittest.TestCase):
     def test_calculate_supplement_single_1(self):
         number_of_children = 1
         family_composition = 'single'
-        eligibile = True
+        eligible = True
         expected_base_amount = 60
         expected_children_amount = 20.0
         expected_supplement_amount = 80.0
 
-        response = calculate_supplement(self.program, number_of_children, family_composition, eligibile)
+        response = calculate_supplement(self.program, number_of_children, family_composition, eligible)
         self.assertEqual(response['baseAmount'], expected_base_amount)
         self.assertEqual(response['childrenAmount'], expected_children_amount)
         self.assertEqual(response['supplementAmount'], expected_supplement_amount)
@@ -62,12 +62,12 @@ class TestRulesEngineWinterSupplement(unittest.TestCase):
     def test_calculate_supplement_single_2(self):
         number_of_children = 2
         family_composition = 'single'
-        eligibile = True
+        eligible = True
         expected_base_amount = 60
         expected_children_amount = 40.0
         expected_supplement_amount = 100.0
 
-        response = calculate_supplement(self.program, number_of_children, family_composition, eligibile)
+        response = calculate_supplement(self.program, number_of_children, family_composition, eligible)
         self.assertEqual(response['baseAmount'], expected_base_amount)
         self.assertEqual(response['childrenAmount'], expected_children_amount)
         self.assertEqual(response['supplementAmount'], expected_supplement_amount)
@@ -75,12 +75,12 @@ class TestRulesEngineWinterSupplement(unittest.TestCase):
     def test_calculate_supplement_couple_0(self):
         number_of_children = 0
         family_composition = 'couple'
-        eligibile = True
+        eligible = True
         expected_base_amount = 120
         expected_children_amount = 0.0
         expected_supplement_amount = 120.0
 
-        response = calculate_supplement(self.program, number_of_children, family_composition, eligibile)
+        response = calculate_supplement(self.program, number_of_children, family_composition, eligible)
         self.assertEqual(response['baseAmount'], expected_base_amount)
         self.assertEqual(response['childrenAmount'], expected_children_amount)
         self.assertEqual(response['supplementAmount'], expected_supplement_amount)
@@ -88,12 +88,12 @@ class TestRulesEngineWinterSupplement(unittest.TestCase):
     def test_calculate_supplement_couple_1(self):
         number_of_children = 1
         family_composition = 'couple'
-        eligibile = True
+        eligible = True
         expected_base_amount = 120
         expected_children_amount = 20.0
         expected_supplement_amount = 140.0
 
-        response = calculate_supplement(self.program, number_of_children, family_composition, eligibile)
+        response = calculate_supplement(self.program, number_of_children, family_composition, eligible)
         self.assertEqual(response['baseAmount'], expected_base_amount)
         self.assertEqual(response['childrenAmount'], expected_children_amount)
         self.assertEqual(response['supplementAmount'], expected_supplement_amount)
