@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 
 from config import *
 from rules_engine import calculate_winter_supplement
-from validation import validate_input_data
+from validation import validate_winter_supplement_input_data
 
 
 def on_connect(client, userdata, flags, reason_code, properties):
@@ -16,18 +16,20 @@ def on_message(client, userdata, msg):
 
     input_data = json.loads(msg.payload)
     try:
-        validate_input_data(input_data)
+        validate_winter_supplement_input_data(input_data)
     except ValueError as e:
-        print(f'Input validation error {e}')
+        print(f'Input validation error: {e}')
         # TODO publish error message with 0 values, it does nothing but would be good practice I think
         return
     except Exception as e:
-        print(f'Unexpected error {e}')
+        print(f'Unexpected error: {e}')
         return
 
-    calculated_amounts = calculate_winter_supplement(input_data['numberOfChildren'], 
-                                                     input_data['familyComposition'], 
-                                                     input_data['familyUnitInPayForDecember'])
+    calculated_amounts = calculate_winter_supplement(
+        input_data['numberOfChildren'], 
+        input_data['familyComposition'],
+        input_data['familyUnitInPayForDecember']
+        )
 
     output_data = {
         "id": input_data['id'], 

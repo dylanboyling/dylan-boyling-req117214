@@ -2,11 +2,12 @@ import logging
 
 logger = logging.getLogger()
 
-def validate_input_data(data):
-    required_keys = ['id', 'numberOfChildren', 'familyComposition', 'familyUnitInPayForDecember']
-    if not all(key in data for key in required_keys):
-        # TODO improve: which key is missing? what if more than one key is missing?
-        raise ValueError('Missing required input key(s)')
+def validate_winter_supplement_input_data(data):
+    required_keys = {'id', 'numberOfChildren', 'familyComposition', 'familyUnitInPayForDecember'}
+    missing_keys = required_keys - data.keys()
+    if missing_keys:
+        logger.info(f'Missing required input key(s) {missing_keys}')
+        raise ValueError(f'Missing required input key(s) {missing_keys}')
     
     # TODO make single/couple constant
     if data['familyComposition'] not in ['single', 'couple']:
