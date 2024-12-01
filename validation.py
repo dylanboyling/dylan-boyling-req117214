@@ -31,7 +31,7 @@ def validate_key_in_set(key, set, field_name):
 
 
 def validate_non_negative_int(value, field_name):
-    if not isinstance(value, int) or value < 0:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
         logger.info(f'{field_name}: {value}, type: {type(value)}')
         raise ValueError(
             f'Invalid {field_name}. Must be a non-negative integer.')
