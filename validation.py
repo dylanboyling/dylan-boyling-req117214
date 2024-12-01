@@ -6,20 +6,29 @@ logger = logging.getLogger()
 
 def validate_winter_supplement_input_data(data):
     required_keys = {'id', 'numberOfChildren', 'familyComposition', 'familyUnitInPayForDecember'}
+
+    validate_keys(required_keys, data)
+    validate_key_in_set(data['familyComposition'], FAMILY_COMPOSITIONS)
+    validate_non_negative_int(data['numberOfChildren'], "number of children")
+    validate_bool(data['familyUnitInPayForDecember'])
+
+def validate_keys(required_keys, data):
     missing_keys = required_keys - data.keys()
     if missing_keys:
         logger.info(f'Missing required input key(s) {missing_keys}')
         raise ValueError(f'Missing required input key(s) {missing_keys}')
     
-    if data['familyComposition'] not in FAMILY_COMPOSITIONS:
-        logger.info(f'familyComposition: {data['familyComposition']}')
-        raise ValueError(f'Invalid family composition. Must be one single or couple.')
+def validate_key_in_set(key, set, field_name):
+    if key not in set:
+        logger.info(f'{field_name}: {key}')
+        raise ValueError(f'Invalid {field_name} Must be one of {set}.')
     
-    if not isinstance(data['numberOfChildren'], int) or data['numberOfChildren'] < 0:
-        logger.info(f'numberOfChildren: {data['numberOfChildren']}, type: {type(data['numberOfChildren'])}')
-        raise ValueError('Invalid number of children. Must be a non-negative integer.')
-    
-    if not isinstance(data['familyUnitInPayForDecember'], bool):
-        logger.info(f'familyUnitInPayForDecember: {data['familyUnitInPayForDecember']}, type: {type(data['familyUnitInPayForDecember'])}')
-        raise ValueError('Invalid familyUnitInPayForDecember. Must be a boolean.')
+def validate_non_negative_int(value, field_name):
+    if not isinstance(value, int) or value < 0:
+        logger.info(f'{field_name}: {value}, type: {type(value)}')
+        raise ValueError(f'Invalid {field_name}. Must be a non-negative integer.')
 
+def validate_bool(value, field_name):
+    if not isinstance(value, bool):
+        logger.info(f'{field_name}: {value}, type: {type(value)}')
+        raise ValueError(f'Invalid {field_name}. Must be a boolean.')
