@@ -7,13 +7,13 @@ logger = logging.getLogger()
 def validate_winter_supplement_input_data(data):
     required_keys = {'id', 'numberOfChildren', 'familyComposition', 'familyUnitInPayForDecember'}
 
-    validate_keys(required_keys, data)
-    validate_key_in_set(data['familyComposition'], FAMILY_COMPOSITIONS)
-    validate_non_negative_int(data['numberOfChildren'], "number of children")
-    validate_bool(data['familyUnitInPayForDecember'])
+    validate_keys(required_keys, data.keys())
+    validate_key_in_set(data['familyComposition'], FAMILY_COMPOSITIONS, 'familyComposition')
+    validate_non_negative_int(data['numberOfChildren'], 'numberOfChildren')
+    validate_bool(data['familyUnitInPayForDecember'], 'familyUnitInPayForDecember')
 
 def validate_keys(required_keys, data):
-    missing_keys = required_keys - data.keys()
+    missing_keys = required_keys - data
     if missing_keys:
         logger.info(f'Missing required input key(s) {missing_keys}')
         raise ValueError(f'Missing required input key(s) {missing_keys}')
