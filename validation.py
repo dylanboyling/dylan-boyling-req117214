@@ -24,10 +24,10 @@ def validate_keys(required_keys, data):
         raise ValueError(f'Missing required input key(s) {missing_keys}')
 
 
-def validate_key_in_set(key, set, field_name):
-    if key not in set:
+def validate_key_in_set(key, valid_set, field_name):
+    if key not in valid_set:
         logger.info(f'{field_name}: {key}')
-        raise ValueError(f'Invalid {field_name} Must be one of {set}.')
+        raise ValueError(f'Invalid {field_name} Must be one of {valid_set}.')
 
 
 def validate_non_negative_int(value, field_name):
