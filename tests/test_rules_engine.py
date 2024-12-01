@@ -2,6 +2,14 @@ import unittest
 
 from rules_engine import calculate_base_amount, calculate_children_amount, calculate_supplement
 
+class TestRulesEngine(unittest.TestCase):
+    def test_calculate_supplement_invalid_program(self):
+        program = "invalid_program"
+        number_of_children = 2
+        family_composition = 'single'
+        eligible = True
+        self.assertRaises(KeyError, calculate_supplement, program, number_of_children, family_composition, eligible)
+
 class TestRulesEngineWinterSupplement(unittest.TestCase):
     def setUp(self):
         self.program = 'winter_supplement'
@@ -62,12 +70,5 @@ class TestRulesEngineWinterSupplement(unittest.TestCase):
     def test_calculate_supplement_invalid_composition(self):
         number_of_children = 2
         family_composition = 'alone'
-        eligible = True
-        self.assertRaises(KeyError, calculate_supplement, self.program, number_of_children, family_composition, eligible)
-
-    def test_calculate_supplement_invalid_program(self):
-        self.program = 'fake_supplement'
-        number_of_children = 2
-        family_composition = 'single'
         eligible = True
         self.assertRaises(KeyError, calculate_supplement, self.program, number_of_children, family_composition, eligible)
