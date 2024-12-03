@@ -46,7 +46,7 @@ class MQTTClientWrapper:
             if output_data:
                 self.publish_json(output_data)
 
-    def start(self):
+    def start_forever(self):
         self.client.connect(HOST, PORT, KEEP_ALIVE)
         self.client.loop_forever()
 

@@ -13,12 +13,12 @@ class TestMQTTClientWrapper(unittest.TestCase):
         self.on_message = MagicMock()
 
     @patch('client.mqtt.Client')
-    def test_start(self, MockMQTTClient):
+    def test_start_forever(self, MockMQTTClient):
         mock_client = MockMQTTClient.return_value
         client = MQTTClientWrapper(
             self.input_topic, self.output_topic, self.topic_id, self.on_message
         )
-        client.start()
+        client.start_forever()
 
         mock_client.connect.assert_called_once_with(
             HOST, PORT, KEEP_ALIVE)

@@ -11,4 +11,4 @@ logging.basicConfig(
 
 if __name__ == "__main__":
     client = MQTTClientWrapper(INPUT_TOPIC, OUTPUT_TOPIC, TOPIC_ID, winter_supplement_message_handler)
-    client.start()
+    client.start_forever()
