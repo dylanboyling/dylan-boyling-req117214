@@ -15,12 +15,6 @@ def winter_supplement_message_handler(topic_id, input_data):
             "id": input_data.get('id', 'unknown_id'),
             "error": str(e)
         }
-    except Exception as e:
-        logger.error(f'Unexpected error handling message: {e}')
-        return {
-            "id": input_data.get('id', 'unknown_id'),
-            "error": str(e)
-        }
 
     calculated_amounts = calculate_supplement(
         'winter_supplement',
