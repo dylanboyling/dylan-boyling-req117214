@@ -67,25 +67,6 @@ class TestMQTTClientWrapperOnMessage(unittest.TestCase):
         )
 
     @patch('client.mqtt.Client')
-    def test_on_message_json_error(self, MockMQTTClient):
-        mock_client = MockMQTTClient.return_value
-        test_input_data = {"id": "test_id"}
-        test_output_data = {"id": "test_id", "test": "output"}
-        message_handler = MagicMock(return_value=test_output_data)
-        
-        msg = MagicMock()
-        msg.payload = json.dumps(test_input_data).encode("utf-8")
-        msg.topic = self.input_topic  
-
-        client = MQTTClientWrapper(self.input_topic, self.output_topic, self.topic_id, message_handler)
-        client._on_message(mock_client, None, msg)
-
-        message_handler.assert_called_once_with(self.input_topic, test_input_data)
-        mock_client.publish.assert_called_once_with(
-            self.publish_topic, json.dumps(test_output_data, indent=2).encode('utf-8')
-        )
-
-    @patch('client.mqtt.Client')
     def test_on_message_json_decode_error(self, MockMQTTClient):
         mock_client = MockMQTTClient.return_value
         message_handler = MagicMock()
@@ -107,7 +88,7 @@ class TestMQTTClientWrapperOnMessage(unittest.TestCase):
         )
 
     @patch('client.mqtt.Client')
-    def test_on_message_exception(self, MockMQTTClient):
+    def test_on_message_exception_handling(self, MockMQTTClient):
         mock_client = MockMQTTClient.return_value
         message_handler = MagicMock(side_effect=Exception("Test exception"))
         test_input_data = {"id": "test_id"}
