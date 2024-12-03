@@ -72,3 +72,7 @@ Optionally, you can use the coverage dependency to generate a coverage report:
 
     coverage run --source=. -m unittest discover -s tests -p "test_*.py"
     coverage report
+
+
+### Additional Resources
+* [paho-mqtt documentation](https://eclipse.dev/paho/files/paho.mqtt.python/html/client.html)
