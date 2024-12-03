@@ -4,26 +4,26 @@ ISL21 REQ117214 Written Assignment by Dylan Boyling
 ## Setting up the Developer Environment
 
 ### Git
-Download the latest version of 64-bit Git for Windows [here](https://git-scm.com/downloads/win). Run the file once its downloaded and follow the recommended installation options. 
+Download the latest version of 64-bit Git for Windows [here](https://git-scm.com/downloads/win). Run the file once it's downloaded and follow the recommended installation options. 
 
 After installation, set your Git username and email using the following commands:
 
     git config --global user.name "YOUR_NAME"
     git config --global user.email "YOUR_EMAIL"
 
-Verify Git installed correctly by running:
+Verify Git is installed correctly by running:
 
     git --version
 
 ### Python 
-Download Python 3.1.0 [here](https://www.python.org/downloads/). Run the file once its downloaded, check the box to add python to your PATH, and follow the recommended installation options.
+Download Python 3.1.0 [here](https://www.python.org/downloads/). Run the file once it's downloaded, check the box to add python to your PATH, and follow the recommended installation options.
 
-Verify Python installed correctly by running:
+Verify Python is installed correctly by running:
 
     python --version
 
 ### VSCode
-Download the latest version of VSCode for your operating system [here](https://code.visualstudio.com/download). Run the file once its downloaded and follow the recommended installation options. 
+Download the latest version of VSCode for your operating system [here](https://code.visualstudio.com/download). Run the file once it's downloaded and follow the recommended installation options. 
 
 After installation, open VSCode and press Ctrl+Shift+X to open the extensions tab and install the following extensions:
 
