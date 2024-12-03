@@ -1,28 +1,28 @@
 import json
+import logging
 
 from client import MQTTClientWrapper
 from config import INPUT_TOPIC, OUTPUT_TOPIC, TOPIC_ID
 from rules_engine import calculate_supplement
 from validation import validate_winter_supplement_input_data
 
-import logging
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     encoding='utf-8', level=logging.INFO)
 
 
 def on_message(client, userdata, msg):
-    print(f'{msg.topic}: {msg.payload}')
+    logger.info(f'{msg.topic}: {msg.payload}')
 
     input_data = json.loads(msg.payload)
     try:
         validate_winter_supplement_input_data(input_data)
     except ValueError as e:
-        print(f'Input validation error: {e}')
+        logger.info(f'Input validation error: {e}')
         # TODO publish error message with 0 values, it does nothing but would be good practice I think
         return
     except Exception as e:
-        print(f'Unexpected error: {e}')
+        logger.error(f'Unexpected error: {e}')
         return
 
     calculated_amounts = calculate_supplement(
