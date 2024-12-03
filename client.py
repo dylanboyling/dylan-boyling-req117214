@@ -20,11 +20,11 @@ class MQTTClientWrapper:
         self.client.on_message = self._on_message
 
     def _on_connect(self, client, userdata, flags, reason_code, properties):
-        logger.info(
-            f'Connected to topic {self.input_topic} with result code {reason_code}')
+        logger.info(f'Connected to topic {self.input_topic} with result code {reason_code}')
         client.subscribe(f'{self.input_topic}/{self.topic_id}')
 
     def _on_message(self, client, userdata, msg):
+        logger.info(f'Received message on topic {self.input_topic}')
         input_data = {}
         output_data = {}
         try:
