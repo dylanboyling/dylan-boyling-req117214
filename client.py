@@ -31,13 +31,13 @@ class MQTTClientWrapper:
             input_data = json.loads(msg.payload)
             output_data = self.message_handler(msg.topic, input_data)
         except json.JSONDecodeError as e:
-            logger.error(f"JSON decode error on topic {self.topic_id}: {e}")
+            logger.error(f"JSON decode error on topic {msg.topic}: {e}")
             output_data = {
                 "id": input_data.get('id', 'unknown_id'),
                 "error": str(e)
             }
         except Exception as e:
-            logger.error(f'Unexpected error handling message on topic {self.topic_id}: {e}')
+            logger.error(f'Unexpected error handling message on topic {msg.topic}: {e}')
             output_data = {
                 "id": input_data.get('id', 'unknown_id'),
                 "error": str(e)
