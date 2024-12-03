@@ -60,7 +60,6 @@ Install required dependencies:
 * `validation.py`: Validates incoming input data for the rules engine, this ensures that the rules engine can focus on business logic.
 * `tests/`: Contains unit tests for all major components of the project.
 
-
 ## Starting the Rules Engine
 Before starting the rules engine, we need to ensure the MQTT topic ID in the config is using the correct one from our web app instance. 
 
