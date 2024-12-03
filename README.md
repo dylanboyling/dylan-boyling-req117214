@@ -44,7 +44,7 @@ Open your terminal, ensure you are in your projects folder, and clone the reposi
 Activate your python virtual environment:
 
     python -m venv venv
-    venv\Scripts\activate
+    .\venv\Scripts\activate
 
 Install required dependencies:
 
@@ -64,4 +64,11 @@ Start the rules engine by running:
 Now that the rules engine is running, try filling out the form on the Winter Supplement Calculator and then clicking 'Submit'. Once the rules engine has processed your request, you should see the web app update with the results of your request. 
 
 ## Running Unit Tests
+Run the tests with:
 
+    python -m unittest discover -s tests -p "test_*.py"
+
+Optionally, you can use the coverage dependency to generate a coverage report:
+
+    coverage run --source=. -m unittest discover -s tests -p "test_*.py"
+    coverage report
